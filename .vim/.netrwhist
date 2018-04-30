@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/jyurek'
+let g:netrw_dirhist_2='/Users/jyurek/Documents/Dropbox/D&D/Campaigns/clockwork'
+let g:netrw_dirhist_3='/Users/jyurek/Documents/Dropbox/D&D/Campaigns/clockwork/story'

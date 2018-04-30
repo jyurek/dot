@@ -1,0 +1,10 @@
+#!/usr/bin/osascript
+
+on run argv
+  tell application "iTerm"
+    tell current terminal
+      set n to get name of current session
+      return n
+    end tell
+  end tell
+end run

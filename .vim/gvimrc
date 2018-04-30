@@ -1,0 +1,15 @@
+" Tab motions
+inoremap <D-Left> <Esc>gT
+inoremap <D-Right> <Esc>gt
+noremap <D-Left> gT
+noremap <D-Right> gt
+
+" Split motions
+inoremap   <M-Left>    <Esc><C-W><Left>
+inoremap   <M-Right>   <Esc><C-W><Right>
+inoremap   <M-Up>      <Esc><C-W><Up>
+inoremap   <M-Down>    <Esc><C-W><Down>
+noremap    <M-Left>         <C-W><Left>
+noremap    <M-Right>        <C-W><Right>
+noremap    <M-Up>           <C-W><Up>
+noremap    <M-Down>         <C-W><Down>

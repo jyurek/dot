@@ -1,0 +1,5 @@
+#!/usr/bin/osascript
+on run argv
+  set display_string to (item 1 of argv)
+  tell application "Quicksilver" to show large type display_string
+end run

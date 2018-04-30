@@ -1,0 +1,17 @@
+#!/usr/bin/osascript
+
+on run argv
+  set new_name to (item 1 of argv)
+  tell application "iTerm"
+    tell current terminal
+      repeat with s in sessions
+        set current_name to name of s
+        if (current_name = new_name) then
+          set name of s to ""
+        end if
+      end repeat
+      set name of current session to new_name
+    end tell
+  end tell
+end run
+

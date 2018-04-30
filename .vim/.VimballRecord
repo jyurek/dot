@@ -1,0 +1,3 @@
+supertab.vba: call delete('/Users/jyurek/.vim/doc/supertab.txt')|call delete('/Users/jyurek/.vim/plugin/supertab.vim')
+Align.vba: call delete('/Users/jyurek/.vim/plugin/AlignPlugin.vim')|call delete('/Users/jyurek/.vim/plugin/AlignMapsPlugin.vim')|call delete('/Users/jyurek/.vim/plugin/cecutil.vim')|call delete('/Users/jyurek/.vim/doc/Align.txt')|call delete('/Users/jyurek/.vim/autoload/Align.vim')|call delete('/Users/jyurek/.vim/autoload/AlignMaps.vim')
+tComment.vba: call delete('/Users/jyurek/.vim/doc/tComment.txt')|call delete('/Users/jyurek/.vim/plugin/tComment.vim')|call delete('/Users/jyurek/.vim/autoload/tcomment.vim')

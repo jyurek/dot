@@ -1,0 +1,33 @@
+#!/bin/bash
+
+pidfile=/usr/local/var/pid/poll-tmux-buffers.pid
+function clean_up {
+  rm $pidfile
+  exit
+}
+
+function ignore {
+  # Do Nothing
+  /bin/true
+}
+
+function do_poll {
+  trap clean_up SIGINT SIGTERM
+  trap ignore SIGHUP
+
+  mkdir -p `dirname $pidfile`
+  if [ -f $pidfile ] && [ ${1:-none} != "-f" ]; then
+    exit
+  fi
+
+  echo $$ > $pidfile
+
+  while true; do
+    if test -n "`tmux showb 2> /dev/null`"; then
+      tmux saveb - | pbcopy && tmux deleteb
+    fi
+    sleep 0.25
+  done
+}
+
+do_poll $1 &

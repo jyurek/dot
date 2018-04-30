@@ -1,0 +1,68 @@
+[user]
+  name = Jon Yurek
+  email = jyurek@thoughtbot.com
+[color]
+  branch = true
+  diff = true
+  interactive = true
+  pager = true
+  status = true
+[alias]
+  st = status -sb
+  co = checkout
+  c = commit -v
+  a = !git add -A && git status
+  b = checkout -b
+  ac = !sh -c 'git add -A && git commit -v '
+  acm = !git add -A && git commit -vm
+  wip = !sh -c 'git add -A && git commit -m wip'
+  staged = diff --cached
+  unstaged = diff
+  both = diff HEAD
+  amend = commit --amend -v
+  cs = commit --amend -v -C HEAD
+  ch = cherry -v
+  plre = pull --rebase
+  rem = rebase master
+  pick = cherry-pick
+  child-of = !sh -c '([[ $(git merge-base $1 $0) == $(git log -n 1 --format="%H" $0) ]] && echo "$0 is a child of $1") || echo "$0 is not a child of $1"'
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue%an%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  publish = !sh -c 'git push origin \"$0\" && git config \"branch.$0.remote\" origin && git config \"branch.$0.merge\" \"refs/heads/$0\"'
+  track = !sh -c 'git config \"branch.$1.remote\" $0 && git config \"branch.$1.merge\" \"refs/heads/$1\"'
+  l = log --name-status --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue%an%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  can-ff = !sh -c 'git merge-base $(git show-ref --hash $(git branch | grep '*' | cut -d ' ' -f 2)) $(git show-ref --hash $0 | head -n 1)'
+  next = !git add . && git rebase --continue
+  cleanup = !git remote prune origin && git gc && git clean -dfx && git stash clear
+  staging = push staging master
+  fixup = !git add -A && git commit --amend -C HEAD && git status -sb
+  getpr = !sh -c 'git fetch origin pull/$0/head:pr-$0 && git co pr-$0 && git fetch origin && git rebase origin/master'
+  gistdiff = !sh -c 'git log --pretty=email --no-color -p $1..$2 | gist -p -f $0 | pbcopy'
+  compare = log --left-right --graph --cherry-pick --oneline
+  message = show -s --pretty=full
+  echo = !sh -c 'echo ${0:-w} && echo "---" && echo ${1:-boo}'
+  utd = !sh -c 'git fetch ${0/sh/origin} && git rebase ${0/sh/origin}/${1:-master}'
+  rmb = !sh -c 'git push $0 :$1 && git branch -d $1'
+  filesin = diff-tree --no-commit-id --name-only -r
+  changesin = diff-tree --no-commit-id --name-status -r
+  pr = !hub pull-request
+  sha = log -n 1 --pretty=format:%H
+[merge "gemfilelock"]
+  name = relocks the gemfile.lock
+  driver = bundle lock
+[format]
+  pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue%an%Creset %Cgreen(%cr)%Creset
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@heroku.com:"]
+  insteadOf = "heroku:"
+[push]
+  default = simple
+[core]
+	excludesfile = /Users/jyurek/.gitignore
+[diff]
+  noprefix = true
+  compactionHeuristic = true

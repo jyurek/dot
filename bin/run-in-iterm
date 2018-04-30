@@ -1,0 +1,27 @@
+#!/usr/bin/osascript
+
+on run argv
+  tell application "iTerm"
+    if ((count of argv) > 1) then
+      set command to (item 2 of argv)
+      tell current terminal
+        try
+          set our_session to (the first session whose name contains (item 1 of argv))
+        on error this_error
+          set our_session to the current session
+        end try
+      end tell
+    else
+      set command to (item 1 of argv)
+      set our_session to the current session of the current terminal
+    end if
+
+    tell our_session to write text command
+
+    activate
+    tell current terminal
+      tell current terminal to select our_session
+    end tell
+  end tell
+end run
+
