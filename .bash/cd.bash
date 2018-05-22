@@ -1,5 +1,5 @@
 function cd {
-  builtin cd $*
+  builtin cd "$*"
   if [[ -f .ruby-version ]]; then
     chruby $(cat .ruby-version)
   else

@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'BlakeWilliams/vim-tbro'
 Plug 'PeterRincker/vim-argumentative'
+Plug 'bernerdschaefer/vim-null'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
@@ -10,6 +11,7 @@ Plug '~/Development/elm-vim'
 Plug 'int3/vim-extradite'
 Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
+Plug 'kisom/eink.vim'
 Plug 'lukerandall/haskellmode-vim'
 Plug 'mbbill/undotree'
 Plug 'morhetz/gruvbox'
@@ -239,7 +241,8 @@ nmap <silent> <Leader>g :TestVisit<CR>
 
 " vim-test transformation
 function! AlertTransformation(cmd) abort
-  return a:cmd." && pass || fail"
+  return "docker-compose run web ".a:cmd
+  " ." && pass || fail"
 endfunction
 let g:test#custom_transformations = {'alert': function('AlertTransformation')}
 let g:test#transformation = 'alert'
