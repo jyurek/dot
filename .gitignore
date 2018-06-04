@@ -26,6 +26,7 @@ vendor/bunder_gems
 .vimundo
 .vim/plugged
 .vim/view
+.vim/.netrwhist
 zeus.json
 custom_plan.rb
 .gitattributes
