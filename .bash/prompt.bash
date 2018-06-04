@@ -18,7 +18,8 @@ function which_git {
 }
 
 function parse_git_dirty {
-  [[ $($GIT status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo '✏ '
+  # [[ $($GIT status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo '✏ '
+  $($GIT diff-index --quiet HEAD 2>/dev/null) && echo -n '' || echo -n '✏ '
 }
 
 function git_branch_color {
