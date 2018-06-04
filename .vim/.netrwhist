@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/jyurek/Development/jon-yurek-rails-pairing/spec/model'
 let g:netrw_dirhist_2='/Users/jyurek/Development/jon-yurek-rails-pairing/spec'
 let g:netrw_dirhist_3='/Users/jyurek/Development/jon-yurek-rails-pairing/spec/models'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/jyurek/Development/jon-yurek-rails-pairing/app/mod
 let g:netrw_dirhist_5='/Users/jyurek/Development/jon-yurek-rails-pairing/spec/views/root'
 let g:netrw_dirhist_6='/Users/jyurek/Development/jon-yurek-rails-pairing/spec/views'
 let g:netrw_dirhist_7='/Users/jyurek/Development/jon-yurek-rails-pairing/app/models'
+let g:netrw_dirhist_8='/Users/jyurek/.bash'

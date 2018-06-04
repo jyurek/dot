@@ -9,12 +9,28 @@ function timer_stop {
 
 trap 'timer_start' DEBUG
 
+function which_git {
+  if [[ -d "./.dot" ]]; then
+    GIT="$DOTCMD"
+  else
+    GIT="git"
+  fi
+}
+
 function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo '✏ '
+  [[ $($GIT status 2> /dev/null | tail -n1) != "nothing to commit, working tree clean" ]] && echo '✏ '
+}
+
+function git_branch_color {
+  if [[ -d "./.dot" ]]; then
+    branch_color="\e[34m"
+  else
+    branch_color="\e[35m"
+  fi
 }
 
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+  $GIT branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 function latest_command {
@@ -25,15 +41,17 @@ function prompt_command_function
 {
   last_result=$?
   timer_stop
+  which_git
 
   last_result="\[\e[33m\]$last_result\[\e[0m\]"
   titlebar_last_command="\[\e]2;$(latest_command)\a\]"
 
   git_branch=$(parse_git_branch)
   git_dirty=$(parse_git_dirty)
+  git_branch_color
 
   git_dirty=${git_dirty:+" \[\e[31m\]$git_dirty\[\e[0m\]"}
-  git_branch=${git_branch:+" (\[\e[35m\]${git_branch}\[\e[0m\]${git_dirty})"}
+  git_branch=${git_branch:+" (\[${branch_color}\]${git_branch}\[\e[0m\]${git_dirty})"}
 
   current_ruby=$(chruby | ag \\\* | cut -d" " -f 3)
 
