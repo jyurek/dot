@@ -97,5 +97,4 @@ export HOMEBREW_GITHUB_API_TOKEN=6d06b95ef776dcd0cb2be1346152bb9f10d8870e
 export FZF_COMPLETION_TRIGGER='``'
 export GEM_HOME=
 
-source /usr/local/opt/chruby/share/chruby/chruby.sh
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
