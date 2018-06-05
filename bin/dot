@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [[ -z $1 ]]; then
+  CMD="status -s"
+else
+  if [[ -x $HOME/bin/dot-$1 ]]; then
+    exec $HOME/bin/dot-$@
+  else
+    CMD=$@
+  fi
+fi
+
+git --git-dir=$HOME/.dot --work-tree=$HOME $CMD
