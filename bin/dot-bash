@@ -1,0 +1,4 @@
+#!/bin/sh
+
+CMD="$EDITOR $HOME/.bash/$1.bash"
+exec $CMD
