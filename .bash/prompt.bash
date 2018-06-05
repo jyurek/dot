@@ -54,7 +54,8 @@ function prompt_command_function
   git_dirty=${git_dirty:+" \[\e[31m\]$git_dirty\[\e[0m\]"}
   git_branch=${git_branch:+" (\[${branch_color}\]${git_branch}\[\e[0m\]${git_dirty})"}
 
-  current_ruby=$(chruby | ag \\\* | cut -d" " -f 3)
+  # current_ruby=$(chruby | ag \\\* | cut -d" " -f 3)
+  current_ruby=$(cat ~/.tool-versions | ag ruby | cut -d" " -f 2)
 
   PS1="$last_result \[\e[32m\]${timer_show}s\[\e[0m\] \[\e[33m\]$current_ruby\[\e[0m\] \[\e[32m\]\w\[\e[0m\]$git_branch \$ "
 }
