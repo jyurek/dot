@@ -58,46 +58,17 @@ set -o vi
 
 eval `ssh-agent`
 ssh-add 2> /dev/null
-
-export AWS_ACCOUNT=jyurek
-function aws_account {
-  if [ -f $HOME/.aws/$1 ]; then
-    source $HOME/.aws/$1
-    export AWS_ACCOUNT=$1
-  else
-    echo "No AWS Credentials for $1"
-  fi
-}
-aws_account $AWS_ACCOUNT
+source /usr/local/opt/asdf/asdf.sh
 
 # Tab-completions
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
-
 if [ -f $HOME/.bash/completions.bash ]; then
   . $HOME/.bash/completions.bash
 fi
 
-complete -C aws_completer aws
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
+# Configuration in well-named files
 for bashfile in $HOME/.bash/*.bash; do
   source $bashfile
 done
-
-# For 1pass
-export ONEPASSWORD_KEYCHAIN=$HOME/Documents/Dropbox\ \(Personal\)/1Password/1Password.agilekeychain
-
-export HOMEBREW_GITHUB_API_TOKEN=6d06b95ef776dcd0cb2be1346152bb9f10d8870e
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_COMPLETION_TRIGGER='``'
-export GEM_HOME=
-
-source /usr/local/opt/asdf/asdf.sh
-# source /usr/local/opt/chruby/share/chruby/chruby.sh
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-

@@ -31,6 +31,7 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'w0rp/ale'
 Plug 'rhysd/vim-crystal'
 Plug 'kchmck/vim-coffee-script'
+Plug '/usr/local/opt/fzf'
 
 call plug#end()
 
