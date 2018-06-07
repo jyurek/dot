@@ -20,23 +20,17 @@ function ghistory
   git grep $1 $(git rev-list --all)
 }
 
-export BREW=/usr/local/bin/brew
+export BREW=brew
 export BREW_HOME=`$BREW --prefix`
-export CABAL_HOME=$HOME/.cabal
-export PATH=./bin:$CABAL_HOME/bin:$BREW_HOME/bin:$BREW_HOME/sbin:$HOME:$PATH:$HOME/bin:/usr/local/share/npm/bin:$GOPATH/bin
+export PATH=./bin:$BREW_HOME/bin:$BREW_HOME/sbin:$HOME:$PATH:$HOME/bin
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development
-export GOPATH=$HOME/Development/go
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export JAVA_OPTS="-Xmx4096m -Xss2048k"
 export TERM=xterm-256color
 
 alias :q="exit"
 alias :e="$EDITOR"
 alias rerc='source ~/.bash_profile'
-alias rr='export RUBIES=(/usr/local/rubies/*)'
-alias mvim='mvim --servername VIM --remote-tab-silent'
 alias be='bundle exec'
 alias remigrate='rake db:migrate && rake db:migrate:redo && rake db:schema:dump db:test:prepare'
 alias dnsip='dig myip.opendns.com @resolver1.opendns.com +short'
