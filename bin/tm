@@ -1,6 +1,8 @@
 #!/bin/sh
 tm() {
-  if [ -z $1 ]; then
+  if [ "$1" = "-nvm" ]; then
+    true
+  elif [ -z $1 ]; then
     tmux switch-client -l
   else
     if [ -z "$TMUX" ]; then
