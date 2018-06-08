@@ -1,0 +1,5 @@
+#!/bin/sh
+
+last_session=`tmux display-message -p "#{client_last_session}"`
+echo $last_session
+tmux ls | cut -d: -f1 | grep -v $last_session
