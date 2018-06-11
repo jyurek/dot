@@ -12,10 +12,7 @@ fi
 # ------------
 source "/usr/local/opt/fzf/shell/key-bindings.bash"
 
-# Use ~~ as the trigger sequence instead of the default **
-export FZF_COMPLETION_TRIGGER='~~'
-
-# Options to fzf command
+export FZF_COMPLETION_TRIGGER='\\'
 export FZF_COMPLETION_OPTS='+c -x'
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
