@@ -18,6 +18,7 @@ Plug 'morhetz/gruvbox'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -254,11 +255,6 @@ let g:test#transformation = 'alert'
 let g:test#custom_strategies = {'tbro': function('tbro#send')}
 let g:test#strategy = 'tbro'
 
-" " Syntastic
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_ruby_exec = '/usr/local/rubies/mri-2.3.3/bin/ruby'
-" let g:syntastic_always_populate_loc_list = 1
-
 " Use line cursor in insert mode, block in normal (only in tmux)
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -268,16 +264,15 @@ else
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" haskellmode
-let g:haddock_browser = "/Applications/Firefox.app"
-
 " elm
 let g:elm_format_autosave = 1
+
+" Prettier
+let g:prettier#config#parser = 'babylon'
 
 " ALE
 let g:ale_sign_column_always = 1
 let g:ale_linters = {'ruby': ['ruby']} " disable most ruby linting
-
-" mix format
-" let g:mix_format_on_save = 1
-" let g:mix_format_elixir_bin_path = '~/.asdf/installs/elixir/1.6.0-rc.0/bin'
+let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1

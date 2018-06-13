@@ -22,7 +22,7 @@ function ghistory
 
 export BREW=brew
 export BREW_HOME=`$BREW --prefix`
-export PATH=./bin:$BREW_HOME/bin:$BREW_HOME/sbin:$HOME:$PATH:$HOME/bin
+export PATH=./bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development
