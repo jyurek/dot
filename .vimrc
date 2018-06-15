@@ -198,6 +198,7 @@ nmap <Leader>sao Osave_and_open_page<Esc>:w<CR>
 nmap <Leader>saos Osave_and_open_screenshot(nil, full: true)<Esc>:w<CR>
 nmap <Leader>u :UndotreeToggle<CR>
 nmap <Leader>w :w<CR>
+vmap <Leader>s :!sort<CR>
 
 " Actually do searching with the silver searcher if available
 " https://github.com/ggreer/the_silver_searcher
