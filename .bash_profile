@@ -66,3 +66,7 @@ fi
 for bashfile in $HOME/.bash/*.bash; do
   source $bashfile
 done
+
+# nvm
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
