@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'BlakeWilliams/vim-tbro'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'bernerdschaefer/vim-null'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
@@ -20,6 +19,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
