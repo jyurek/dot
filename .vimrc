@@ -199,6 +199,7 @@ nmap <Leader>saos Osave_and_open_screenshot(nil, full: true)<Esc>:w<CR>
 nmap <Leader>u :UndotreeToggle<CR>
 nmap <Leader>w :w<CR>
 vmap <Leader>s :!sort<CR>
+nmap <Leader>P :Prettier<CR>
 
 " Actually do searching with the silver searcher if available
 " https://github.com/ggreer/the_silver_searcher
@@ -246,8 +247,7 @@ nmap <silent> <Leader>g :TestVisit<CR>
 
 " vim-test transformation
 function! AlertTransformation(cmd) abort
-  return "docker-compose run web ".a:cmd
-  " ." && pass || fail"
+  return a:cmd . " && lt 'Pass' || lt 'Fail'"
 endfunction
 let g:test#custom_transformations = {'alert': function('AlertTransformation')}
 let g:test#transformation = 'alert'
