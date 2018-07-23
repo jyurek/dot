@@ -1,9 +1,7 @@
 #!/bin/sh
 tm() {
-  if [ "$1" = "-nvm" ]; then
+  if [ -z $1 ]; then
     true
-  elif [ -z $1 ]; then
-    tmux switch-client -l
   else
     if [ -z "$TMUX" ]; then
       tmux new-session -As $1
