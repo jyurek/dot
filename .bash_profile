@@ -66,3 +66,5 @@ fi
 for bashfile in $HOME/.bash/*.bash; do
   source $bashfile
 done
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
