@@ -52,7 +52,6 @@ set -o vi
 
 eval `ssh-agent`
 ssh-add 2> /dev/null
-source /usr/local/opt/asdf/asdf.sh
 
 # Tab-completions
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
