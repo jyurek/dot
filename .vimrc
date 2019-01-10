@@ -11,6 +11,7 @@ Plug 'int3/vim-extradite'
 Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
 Plug 'kisom/eink.vim'
+Plug 'leafgarland/typescript-vim'
 Plug 'lukerandall/haskellmode-vim'
 Plug 'mbbill/undotree'
 Plug 'morhetz/gruvbox'
@@ -277,3 +278,6 @@ let g:ale_linters = {'ruby': ['ruby']} " disable most ruby linting
 let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
+
+noremap <Leader>gd :ALEGoToDefinition<CR>
+noremap <Leader>gh :ALEHover<CR>
