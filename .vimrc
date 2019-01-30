@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'BlakeWilliams/vim-tbro'
 Plug 'PeterRincker/vim-argumentative'
+Plug 'TaDaa/vimade'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
@@ -38,7 +39,6 @@ Plug 'kchmck/vim-coffee-script'
 Plug '/usr/local/opt/fzf'
 
 call plug#end()
-
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -185,7 +185,7 @@ nmap <Leader>= mmgg=G`mzz
 nmap <Leader>> :up<CR>:cnf<CR>
 nmap <Leader>I o\|> (fn (l) -> Logger.info(": " <> inspect(l)); l end).()<Esc>F:i
 nmap <Leader>d Orequire 'pry'; binding.pry<Esc>:w<CR>
-nmap <Leader>diff jdV/====<CR>kd:vne<CR>P<C-w>hjV/>>>><CR>kd:vne<CR>P:diffthis<C-w>l:diffthis<CR>
+nmap <Leader>diff mdjV/=====<CR>k"fynjV/>>>>><CR>k"sy:vne<CR>"fP:diffthis<CR>:vne<CR>"sP:diffthis<CR>
 nmap <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
 nmap <Leader>es :split <C-R>=expand("%:p:h") . '/'<CR>
 nmap <Leader>ev :vnew <C-R>=expand("%:p:h") . '/'<CR>
@@ -201,6 +201,9 @@ nmap <Leader>u :UndotreeToggle<CR>
 nmap <Leader>w :w<CR>
 vmap <Leader>s :!sort<CR>
 nmap <Leader>P :Prettier<CR>
+
+" Turn a path relative to % into a path relative to vim's pwd.
+nmap <Leader>R m`f'l"pdi'i<C-r>=resolve(expand("%:h") . "/<C-r>"")<CR><ESC>``
 
 " Actually do searching with the silver searcher if available
 " https://github.com/ggreer/the_silver_searcher
@@ -271,13 +274,3 @@ let g:elm_format_autosave = 1
 
 " Prettier
 let g:prettier#config#parser = 'babylon'
-
-" ALE
-let g:ale_sign_column_always = 1
-let g:ale_linters = {'ruby': ['ruby']} " disable most ruby linting
-let g:ale_fixers = {'javascript': ['prettier', 'eslint']}
-let g:ale_fix_on_save = 1
-let g:ale_sign_column_always = 1
-
-noremap <Leader>gd :ALEGoToDefinition<CR>
-noremap <Leader>gh :ALEHover<CR>
