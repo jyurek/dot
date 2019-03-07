@@ -260,14 +260,9 @@ let g:test#transformation = 'alert'
 let g:test#custom_strategies = {'tbro': function('tbro#send')}
 let g:test#strategy = 'tbro'
 
-" Use line cursor in insert mode, block in normal (only in tmux)
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+let &t_SI = "\x1b[\x35 q"
+let &t_SR = "\x1b[\x33 q"
+let &t_EI = "\x1b[\x30 q"
 
 " elm
 let g:elm_format_autosave = 1
