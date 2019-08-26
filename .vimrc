@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'BlakeWilliams/vim-tbro'
 Plug 'PeterRincker/vim-argumentative'
-Plug 'TaDaa/vimade'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
@@ -11,21 +10,16 @@ Plug 'ElmCast/elm-vim'
 Plug 'int3/vim-extradite'
 Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
-Plug 'kisom/eink.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'lukerandall/haskellmode-vim'
 Plug 'mbbill/undotree'
-Plug 'morhetz/gruvbox'
-Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-flagship'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
@@ -33,10 +27,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'w0rp/ale'
-Plug 'rhysd/vim-crystal'
-Plug 'kchmck/vim-coffee-script'
 Plug '/usr/local/opt/fzf'
+Plug 'yssl/QFEnter'
+
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+" colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'rakr/vim-one'
 
 call plug#end()
 
@@ -47,6 +45,7 @@ set expandtab
 
 set backspace=indent,eol,start
 set nobackup
+set nowritebackup
 set noswapfile
 set history=50                         " keep 50 lines of command line history
 set ruler                              " show the cursor position all the time
@@ -61,16 +60,13 @@ set spellfile=~/.vim/custom-spellings.en.add
 set nofoldenable
 set wildmode=longest,list:longest      " bash like command line tab completion
 set virtualedit=block,onemore          " Allow moving past the end of the line
-set scrolloff=15                       " Provide eleven lines of context
+set scrolloff=15                       " Provide lines of context
 set mouse=nir                          " Enable mouse for scrolling in terminal
 set path+=**
 set colorcolumn=81
 set autoread
-
-" flagship
-set showtabline=1
-set laststatus=2
-set guioptions-=e
+set lazyredraw                         " Don't redraw during a macro
+set suffixesadd=.md                    " Also search for `thing.md` if you gd on `thing`
 
 " Tab-complete options
 set complete=.,w,b,u,t,kspell
@@ -80,12 +76,16 @@ set completeopt=longest,menu
 set undofile
 set undodir=~/.vimundo
 
+" Allow yanking to OS clipboard
+set clipboard+=unnamedplus
+
 " Per-project .vimrc files
 set exrc
 set secure
 
-" This will use the unnamed register as the system clipboard
-set clipboard=unnamed
+" Things I didn't have set but coc.nvim wants me to set
+" set hidden
+"
 
 " Coloration
 if &t_Co > 2 || has("gui_running") " &t_Co => terminal has colors
@@ -201,6 +201,9 @@ nmap <Leader>u :UndotreeToggle<CR>
 nmap <Leader>w :w<CR>
 vmap <Leader>s :!sort<CR>
 nmap <Leader>P :Prettier<CR>
+nmap <Leader>f :copen<CR>
+nmap <Leader>an :ALENext<CR>
+nmap <Leader>ap :ALEPrevious<CR>
 
 " Turn a path relative to % into a path relative to vim's pwd.
 nmap <Leader>R m`f'l"pdi'i<C-r>=resolve(expand("%:h") . "/<C-r>"")<CR><ESC>``
@@ -269,3 +272,127 @@ let g:elm_format_autosave = 1
 
 " Prettier
 let g:prettier#config#parser = 'babylon'
+
+
+
+
+
+nmap <leader>ss :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+" COC.nvim Stuff
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=1
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> <Leader>gd <Plug>(coc-definition)
+nmap <silent> <Leader>gy <Plug>(coc-type-definition)
+nmap <silent> <Leader>gi <Plug>(coc-implementation)
+nmap <silent> <Leader>gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add diagnostic info for https://github.com/itchyny/lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
+
+
+
+" " Using CocList
+" " Show all diagnostics
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
