@@ -22,7 +22,7 @@ function ghistory
 
 export BREW=brew
 export BREW_HOME=`$BREW --prefix`
-export PATH=./bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin
+export PATH=./bin:/usr/local/opt/mongodb@3.2/bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development
@@ -67,3 +67,7 @@ for bashfile in $HOME/.bash/*.bash; do
 done
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NVM_DIR="/Users/jyurek/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
