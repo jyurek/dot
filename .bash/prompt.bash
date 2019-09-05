@@ -46,7 +46,8 @@ function prompt_command_function
   dot_dirty=$(parse_dot_dirty)
   dot_branch=$(parse_dot_branch)
 
-  current_ruby=$(chruby | ag \\\* | cut -d" " -f 3)
+  current_ruby=
+  type chruby > /dev/null 2>&1 && current_ruby=$(chruby | ag \\\* | cut -d" " -f 3)
   # current_ruby=$(cat ~/.tool-versions | ag ruby | cut -d" " -f 2)
 
   PS1="$last_result \[\e[32m\]${timer_show}s\[\e[0m\] \[\e[${dot_dirty}\]${dot_branch}\[\e[0m\] \[\e[33m\]$current_ruby\[\e[0m\] \[\e[32m\]\w\[\e[0m\]$git_branch \$ "
