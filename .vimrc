@@ -234,7 +234,7 @@ au BufNewFile,BufReadPost *.md setlocal spell
 au BufNewFile,BufReadPost *.md setlocal textwidth=80
 au BufNewFile,BufReadPost *.md setlocal includeexpr=substitute(v:fname,'^/','','g')
 au BufNewFile,BufReadPost *.md setlocal suffixesadd+=.md
-let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
+let g:markdown_fenced_languages = ['css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml', 'html']
 
 " Make sure we can bracket via ruby blocks
 runtime macros/matchit.vim

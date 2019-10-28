@@ -67,3 +67,15 @@ for bashfile in $HOME/.bash/*.bash; do
 done
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source /etc/bashrc_fitbit
+# BEGIN ANSIBLE MANAGED BLOCK
+XCODE="$(xcode-select -p 2>/dev/null || echo /Applications/Xcode.app/Contents/Developer)"
+JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"; export JAVA_HOME
+PATH="${HOME}/bin:${HOME}/.local/bin:${HOME}/Library/Python/3.7/bin:${HOME}/Library/Python/2.7/bin:${JAVA_HOME}/bin:/usr/local/gnu/bin:/usr/local/bin:/usr/local/sbin:${PATH}"; export PATH
+MANPATH="/usr/local/gnu/man:/usr/local/share/man:/usr/share/man:${XCODE}/Toolchains/XcodeDefault.xctoolchain/usr/share/man:${XCODE}/usr/share/man"; export MANPATH
+HOMEBREW_CASK_OPTS="--appdir=/Applications"; export HOMEBREW_CASK_OPTS
+HOMEBREW_NO_ENV_FILTERING=1; export HOMEBREW_NO_ENV_FILTERING
+HOMEBREW_NO_AUTO_UPDATE=1; export HOMEBREW_NO_AUTO_UPDATE
+HOMEBREW_NO_UPDATE_CLEANUP=1; export HOMEBREW_NO_UPDATE_CLEANUP
+# END ANSIBLE MANAGED BLOCK
+source /Users/jyurek/.nvm/nvm.sh
