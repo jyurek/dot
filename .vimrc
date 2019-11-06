@@ -11,6 +11,7 @@ Plug 'int3/vim-extradite'
 Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
+Plug 'gabrielelana/vim-markdown'
 Plug 'mbbill/undotree'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
@@ -91,8 +92,8 @@ set secure
 if &t_Co > 2 || has("gui_running") " &t_Co => terminal has colors
   set t_Co=256
   set background=dark
-  let g:gruvbox_italic = 0
   colorscheme gruvbox
+  let g:gruvbox_italicize_strings = '1'
 endif
 
 syntax on
@@ -273,10 +274,6 @@ let g:elm_format_autosave = 1
 " Prettier
 let g:prettier#config#parser = 'babylon'
 
-
-
-
-
 nmap <leader>ss :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
@@ -364,20 +361,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
-
-
 
 " " Using CocList
 " " Show all diagnostics
