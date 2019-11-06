@@ -26,7 +26,7 @@ export PATH=./bin:/usr/local/opt/mongodb@3.2/bin:$BREW_HOME/bin:$BREW_HOME/sbin:
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development
-export TERM=xterm-256color
+export TERM_ITALICS=true
 
 alias :q="exit"
 alias :e="$EDITOR"
@@ -67,7 +67,6 @@ for bashfile in $HOME/.bash/*.bash; do
 done
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-source /etc/bashrc_fitbit
 # BEGIN ANSIBLE MANAGED BLOCK
 XCODE="$(xcode-select -p 2>/dev/null || echo /Applications/Xcode.app/Contents/Developer)"
 JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"; export JAVA_HOME
@@ -78,4 +77,7 @@ HOMEBREW_NO_ENV_FILTERING=1; export HOMEBREW_NO_ENV_FILTERING
 HOMEBREW_NO_AUTO_UPDATE=1; export HOMEBREW_NO_AUTO_UPDATE
 HOMEBREW_NO_UPDATE_CLEANUP=1; export HOMEBREW_NO_UPDATE_CLEANUP
 # END ANSIBLE MANAGED BLOCK
-source /Users/jyurek/.nvm/nvm.sh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
