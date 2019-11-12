@@ -92,7 +92,7 @@ if &t_Co > 2 || has("gui_running") " &t_Co => terminal has colors
   set t_Co=256
   set background=dark
   colorscheme gruvbox
-  let g:gruvbox_italiciza_strings = '1'
+  let g:gruvbox_italicize_strings = '1'
 endif
 
 syntax on

@@ -26,6 +26,7 @@ export PATH=./bin:/usr/local/opt/mongodb@3.2/bin:$BREW_HOME/bin:$BREW_HOME/sbin:
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development
+export TERM=xterm-256color
 export TERM_ITALICS=true
 
 alias :q="exit"
