@@ -1,22 +1,24 @@
 set nocompatible
 call plug#begin('~/.vim/plugged')
 
+Plug '/usr/local/opt/fzf'
 Plug 'BlakeWilliams/vim-tbro'
+Plug 'ElmCast/elm-vim'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'christoomey/vim-conflicted'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'elixir-lang/vim-elixir'
-Plug 'ElmCast/elm-vim'
+Plug 'gabrielelana/vim-markdown'
 Plug 'int3/vim-extradite'
 Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'gabrielelana/vim-markdown'
 Plug 'mbbill/undotree'
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -28,7 +30,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
-Plug '/usr/local/opt/fzf'
 Plug 'yssl/QFEnter'
 
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
