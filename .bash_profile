@@ -55,10 +55,10 @@ eval `ssh-agent`
 ssh-add 2> /dev/null
 
 # Tab-completions
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+if [ -r $(brew --prefix)/etc/profile.d/bash_completion.sh ]; then
+  . $(brew --prefix)/etc/profile.d/bash_completion.sh
 fi
-if [ -f $HOME/.bash/completions.bash ]; then
+if [ -r $HOME/.bash/completions.bash ]; then
   . $HOME/.bash/completions.bash
 fi
 
