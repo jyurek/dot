@@ -1,5 +1,5 @@
 #!/usr/bin/osascript
 on run argv
   set display_string to (item 1 of argv)
-  tell application "Quicksilver" to show large type display_string
+  tell application id "com.runningwithcrayons.Alfred" to run trigger "large_type" in workflow "com.jonyurek.large_type" with argument display_string
 end run
