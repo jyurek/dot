@@ -9,6 +9,8 @@
   status = true
 [alias]
   st = status -sb
+  sw = swtch
+  r = restore
   co = checkout
   c = commit -v
   a = !git add -A && git status
