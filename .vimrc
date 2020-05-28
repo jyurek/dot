@@ -35,6 +35,8 @@ Plug 'yssl/QFEnter'
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " colorschemes
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'morhetz/gruvbox'
 Plug 'rakr/vim-one'
 
@@ -316,8 +318,8 @@ nmap <silent> <Leader>gy <Plug>(coc-type-definition)
 nmap <silent> <Leader>gi <Plug>(coc-implementation)
 nmap <silent> <Leader>gr <Plug>(coc-references)
 
-" Use K to show documentation in preview window
-" nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use C-K to show documentation in preview window
+nnoremap <silent> <Leader>k :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
