@@ -215,7 +215,8 @@ nmap <Leader>R m`f'l"pdi'i<C-r>=resolve(expand("%:h") . "/<C-r>"")<CR><ESC>``
 " https://github.com/ggreer/the_silver_searcher
 cnoreabbrev ag grep
 if executable("ag")
-  set grepprg=ag\ --nogroup\ --nocolor\ --column
+  set grepprg=ag\ --vimgrep
+  set grepformat=%f:%l:%c:%m
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
