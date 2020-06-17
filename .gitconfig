@@ -9,7 +9,7 @@
   status = true
 [alias]
   st = status -sb
-  sw = swtch
+  sw = switch
   r = restore
   co = checkout
   c = commit -v
