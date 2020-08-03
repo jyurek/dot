@@ -25,7 +25,7 @@ export BREW_HOME=`$BREW --prefix`
 export PATH=./.git/SAFE/../../bin:/usr/local/opt/elasticsearch@5.6/bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
-export CDPATH=.:~:~/Development
+export CDPATH=.:~:~/Development:~/Development/clients/
 export TERM_ITALICS=true
 
 alias :q="exit"
