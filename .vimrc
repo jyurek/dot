@@ -14,10 +14,13 @@ Plug 'janko-m/vim-test'
 Plug 'kien/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'mbbill/undotree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pangloss/vim-javascript'
 Plug 'pbrisbin/vim-mkdir'
 Plug 'peitalin/vim-jsx-typescript'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'reedes/vim-pencil'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -31,8 +34,6 @@ Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'yssl/QFEnter'
-
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " colorschemes
 Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim'}
@@ -81,15 +82,11 @@ set undofile
 set undodir=~/.vimundo
 
 " Allow yanking to OS clipboard
-set clipboard+=unnamedplus
+set clipboard+=unnamed,unnamedplus
 
 " Per-project .vimrc files
 set exrc
 set secure
-
-" Things I didn't have set but coc.nvim wants me to set
-" set hidden
-"
 
 " Coloration
 if &t_Co > 2 || has("gui_running") " &t_Co => terminal has colors
@@ -134,10 +131,6 @@ if v:version >= 700
     catch
     endtry
 endif
-
-" This doesn't come up often, but this is totally useful when it does.
-" nnoremap jj <Esc>
-" inoremap jj <Esc>
 
 " Remap autocomplete to Tab
 inoremap <Tab> <C-N>
@@ -187,13 +180,10 @@ nmap <Leader>; lF:xepldf>
 nmap <Leader>< :up<CR>:cpf<CR>
 nmap <Leader>= mmgg=G`mzz
 nmap <Leader>> :up<CR>:cnf<CR>
-nmap <Leader>I o\|> (fn (l) -> Logger.info(": " <> inspect(l)); l end).()<Esc>F:i
-nmap <Leader>d Orequire 'pry'; binding.pry<Esc>:w<CR>
 nmap <Leader>diff mdjV/=====<CR>k"fynjV/>>>>><CR>k"sy:vne<CR>"fP:diffthis<CR>:vne<CR>"sP:diffthis<CR>
 nmap <Leader>ee :e <C-R>=expand("%:p:h") . '/'<CR>
 nmap <Leader>es :split <C-R>=expand("%:p:h") . '/'<CR>
 nmap <Leader>ev :vnew <C-R>=expand("%:p:h") . '/'<CR>
-nmap <Leader>i o\|> IO.inspect(label: "")<Esc>F"i
 nmap <Leader>o :w \| !open %<CR>
 nmap <Leader>q gwip
 nmap <Leader>rc :source $MYVIMRC<CR>
@@ -204,10 +194,8 @@ nmap <Leader>saos Osave_and_open_screenshot(nil, full: true)<Esc>:w<CR>
 nmap <Leader>u :UndotreeToggle<CR>
 nmap <Leader>w :w<CR>
 vmap <Leader>s :!sort<CR>
-nmap <Leader>P :Prettier<CR>
+nmap <Leader>p :Prettier<CR>
 nmap <Leader>f :copen<CR>
-nmap <Leader>an :ALENext<CR>
-nmap <Leader>ap :ALEPrevious<CR>
 
 " Turn a path relative to % into a path relative to vim's pwd.
 nmap <Leader>R m`f'l"pdi'i<C-r>=resolve(expand("%:h") . "/<C-r>"")<CR><ESC>``
@@ -268,9 +256,10 @@ let g:test#transformation = 'alert'
 let g:test#custom_strategies = {'tbro': function('tbro#send')}
 let g:test#strategy = 'tbro'
 
-let &t_SI = "\x1b[\x35 q"
-let &t_SR = "\x1b[\x33 q"
-let &t_EI = "\x1b[\x30 q"
+" Change the cursorbased on what mode vim is in.
+let &t_SI = "\x1b[\x35 q" " SI = Start Insert
+let &t_SR = "\x1b[\x33 q" " SR = Start Replace
+let &t_EI = "\x1b[\x30 q" " EI = End Insert (and Replace)
 
 " elm
 let g:elm_format_autosave = 1
@@ -278,6 +267,7 @@ let g:elm_format_autosave = 1
 " Prettier
 let g:prettier#config#parser = 'babylon'
 
+" Print out what vim things is under the corsor, syntax-wise
 nmap <leader>ss :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
@@ -285,101 +275,3 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-" COC.nvim Stuff
-" if hidden is not set, TextEdit might fail.
-set hidden
-
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" Better display for messages
-set cmdheight=1
-
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> <Leader>gd <Plug>(coc-definition)
-nmap <silent> <Leader>gy <Plug>(coc-type-definition)
-nmap <silent> <Leader>gi <Plug>(coc-implementation)
-nmap <silent> <Leader>gr <Plug>(coc-references)
-
-" Use C-K to show documentation in preview window
-nnoremap <silent> <Leader>k :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" " Using CocList
-" " Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
