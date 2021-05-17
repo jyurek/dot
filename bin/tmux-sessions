@@ -1,5 +1,5 @@
 #!/bin/sh
 
 last_session=`tmux display-message -p "#{client_last_session}"`
-[[ -n $last_session ]] && echo $last_session
-tmux ls -F "#{session_name}"| grep -v ${last_session:-KEEP_ALL_SESSIONS}
+[[ -n $last_session ]] && (tmux ls | grep $last_session)
+tmux ls | grep -v ${last_session:-KEEP_ALL_SESSIONS}
