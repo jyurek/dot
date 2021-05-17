@@ -44,11 +44,13 @@
   message = show -s --pretty=full
   echo = !sh -c 'echo ${0:-w} && echo "---" && echo ${1:-boo}'
   utd = !sh -c 'git fetch ${0/sh/origin} && git rebase ${0/sh/origin}/${1:-master}'
+  test = !sh -c 'remote=${1:+${0:-origin}} branch=${1:-$0} echo ${remote} && echo ${branch}'
   rmb = !sh -c 'git push $0 :$1 && git branch -d $1'
   filesin = diff-tree --no-commit-id --name-only -r
   changesin = diff-tree --no-commit-id --name-status -r
   pr = !hub pull-request
   sha = log -n 1 --pretty=format:%H
+  recent = branch --sort=-committerdate --format=%(committerdate:relative)%09%(refname:short)
 [merge "gemfilelock"]
   name = relocks the gemfile.lock
   driver = bundle lock
@@ -74,3 +76,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
