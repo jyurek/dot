@@ -20,9 +20,9 @@ function ghistory
   git grep $1 $(git rev-list --all)
 }
 
-export BREW=brew
+export BREW=/opt/homebrew/bin/brew
 export BREW_HOME=`$BREW --prefix`
-export PATH=./.git/SAFE/../../bin:/usr/local/opt/elasticsearch@5.6/bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin:/usr/local/sbin
+export PATH=./.git/SAFE/../../bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin:/usr/local/sbin
 export EDITOR=/usr/local/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development:~/Development/clients/
