@@ -26,7 +26,7 @@
   cs = commit --amend -v -C HEAD
   ch = cherry -v
   plre = pull --rebase
-  rem = rebase master
+  rem = rebase main
   pick = cherry-pick
   child-of = !sh -c '([[ $(git merge-base $1 $0) == $(git log -n 1 --format="%H" $0) ]] && echo "$0 is a child of $1") || echo "$0 is not a child of $1"'
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue%an%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
@@ -36,14 +36,14 @@
   can-ff = !sh -c 'git merge-base $(git show-ref --hash $(git branch | grep '*' | cut -d ' ' -f 2)) $(git show-ref --hash $0 | head -n 1)'
   next = !git add . && git rebase --continue
   cleanup = !git remote prune origin && git gc && git clean -dfx && git stash clear
-  staging = push staging master
+  staging = push staging main
   fixup = !git add -A && git commit --amend -C HEAD && git status -sb
-  getpr = !sh -c 'git fetch origin pull/$0/head:pr-$0 && git co pr-$0 && git fetch origin && git rebase origin/master'
+  getpr = !sh -c 'git fetch origin pull/$0/head:pr-$0 && git co pr-$0 && git fetch origin && git rebase origin/main'
   gistdiff = !sh -c 'git log --pretty=email --no-color -p $1..$2 | gist -p -f $0 | pbcopy'
   compare = log --left-right --graph --cherry-pick --oneline
   message = show -s --pretty=full
   echo = !sh -c 'echo ${0:-w} && echo "---" && echo ${1:-boo}'
-  utd = !sh -c 'git fetch ${0/sh/origin} && git rebase ${0/sh/origin}/${1:-master}'
+  utd = !sh -c 'git fetch ${0/sh/origin} && git rebase ${0/sh/origin}/${1:-main}'
   test = !sh -c 'remote=${1:+${0:-origin}} branch=${1:-$0} echo ${remote} && echo ${branch}'
   rmb = !sh -c 'git push $0 :$1 && git branch -d $1'
   filesin = diff-tree --no-commit-id --name-only -r
