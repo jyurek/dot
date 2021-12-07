@@ -20,10 +20,11 @@ function ghistory
   git grep $1 $(git rev-list --all)
 }
 
-export BREW=brew
+export BREW=/opt/homebrew/bin/brew
 export BREW_HOME=`$BREW --prefix`
-export PATH=./.git/SAFE/../../bin:/usr/local/opt/elasticsearch@5.6/bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin:/usr/local/sbin
-export EDITOR=/usr/local/bin/vim
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+export PATH=./.git/SAFE/../../bin:$BREW_HOME/bin:$BREW_HOME/sbin:$PATH:$HOME/bin:$BREW_HOME/sbin
+export EDITOR=$BREW_HOME/bin/vim
 export VISUAL=$EDITOR
 export CDPATH=.:~:~/Development:~/Development/clients/
 export TERM_ITALICS=true
@@ -70,5 +71,5 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # I'd put this in a ~/.bash/nvm.bash file but this'd just get re-added.
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$BREW_HOME/opt/nvm/nvm.sh" ] && . "$BREW_HOME/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$BREW_HOME/opt/nvm/etc/bash_completion.d/nvm" ] && . "$BREW_HOME/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion:q
