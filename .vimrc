@@ -1,6 +1,7 @@
 set nocompatible
 call plug#begin('~/.vim/plugged')
 
+Plug 'AndrewRadev/linediff.vim'
 Plug 'BlakeWilliams/vim-tbro'
 Plug 'PeterRincker/vim-argumentative'
 Plug 'christoomey/vim-conflicted'
