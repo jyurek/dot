@@ -53,6 +53,8 @@ set -o vi
 eval `ssh-agent`
 ssh-add 2> /dev/null
 
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
 # Tab-completions
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
